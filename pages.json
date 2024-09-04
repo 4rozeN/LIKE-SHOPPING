@@ -21,6 +21,18 @@
       }
     }
   ],
+  "subPackages": [
+    {
+      "root": "subpkg",
+      "pages": [{
+        "path" : "goods_detail/goods_detail",
+        "style" : 
+        {
+          "navigationBarTitleText" : ""
+        }
+      }]
+    }
+  ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "LIKE-SHOPPING",
