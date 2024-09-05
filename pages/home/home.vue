@@ -1,5 +1,8 @@
 <template>
   <view>
+    <view class="search-box">
+      <my-search :bgcolor="'#BC0000'" radius="12" @click="goSearch"></my-search>
+    </view>
     <swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
       <swiper-item v-for="item in swiperList" :key="item.goods_id">
         <navigator class="swiper-item" :url="'/subpkg/goods_detail/goods_detail?goods_id=' + item.goods_id">
@@ -55,6 +58,13 @@
       this.getFloorList()
     },
     methods: {
+      // 点击搜索框跳转
+      goSearch () {
+        uni.navigateTo({
+          url: '/subpkg/search/search'
+        })
+      },
+      // 点击导航跳转
       navClickHandler (item) {
         if (item.name === '分类') {
           uni.switchTab({
@@ -103,6 +113,15 @@
 </script>
 
 <style lang="scss" scoped>
+.search-box {
+  // 设置定位效果为吸顶
+  position: sticky;
+  // 吸顶的位置
+  top: 0;
+  // 提高层级，防止被覆盖
+  z-index: 999;
+}
+
 swiper {
   height: 330rpx;
   .swiper-item,

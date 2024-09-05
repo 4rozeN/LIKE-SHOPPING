@@ -1,5 +1,8 @@
 <template>
   <view>
+    <!-- 使用自定义的搜索组件 -->
+    <my-search :bgcolor="searchbgc" @click="goSearch"></my-search>
+    
     <view class="scroll-view-container">
       <!-- 左侧分类选项 -->
       <scroll-view class="left-scroll-view" scroll-y :style="{height: wh + 'px'}">
@@ -8,13 +11,13 @@
         </block>
       </scroll-view>
       <!-- 右侧展示区 -->
-      <scroll-view class="right-scroll-view" scroll-y :style="{height: wh + 'px'}" :scroll-top="scrollTop">
+      <scroll-view class="right-scroll-view" scroll-y :style="{height: wh + 'px', backgroundColor: '#ffffff'}" :scroll-top="scrollTop">
         <view class="cate-lv2" v-for="(itemR, iR) in categoryLevel2" :key="iR">
           <view class="cate-lv2-title">/ {{itemR.cat_name}} /</view>
           <view class="cate-lv3-list">
             <view class="cate-lv3-item" v-for="(item, i) in itemR.children" :key="item.cat_id" @click="gotoGoodsList(item)">
-              <image :src="item.cat_icon"></image>
-              <text>{{item.cat_name}}</text>
+              <image :src="item.cat_icon" style="border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"></image>
+              <text style="font-size: 14px; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">{{item.cat_name}}</text>
             </view>
           </view>
         </view>
@@ -27,6 +30,8 @@
   export default {
     data() {
       return {
+        // 搜索栏背景色
+        searchbgc: '#BC0000',
         // 滚动条距离顶部的距离
         scrollTop: 0,
         // 窗口可用高度
@@ -42,11 +47,17 @@
     async onLoad () {
       // 调用小程序API获得系统信息(同步获取)
       const sysInfo = uni.getSystemInfoSync()
-      this.wh = sysInfo.windowHeight
+      // 自定义的搜索组件占50px，故此减去
+      this.wh = sysInfo.windowHeight -50
       // 获取分类数据
       this.getCategoryList()
     },
     methods: {
+      goSearch () {
+        uni.navigateTo({
+          url: '/subpkg/search/search'
+        })
+      },
       // 点击三级分类项跳转到商品列表页面
       gotoGoodsList(item) {
         uni.navigateTo({

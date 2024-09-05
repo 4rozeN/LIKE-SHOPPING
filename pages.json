@@ -21,13 +21,27 @@
       },
       {
         "path" : "goods_list/goods_list"
+      },
+      {
+        "path" : "search/search",
+        "style" : 
+        {
+          "navigationBarTitleText" : ""
+        }
+      },
+      {
+        "path" : "search_results/search_results",
+        "style" : 
+        {
+          "navigationBarTitleText" : ""
+        }
       }]
     }
   ],
   "globalStyle": {
-    "navigationBarTextStyle": "black",
+    "navigationBarTextStyle": "white",
     "navigationBarTitleText": "LIKE-SHOPPING",
-    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarBackgroundColor": "#BC0000",
     "app-plus": {
       "background": "#efeff4"
     }
