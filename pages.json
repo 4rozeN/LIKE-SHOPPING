@@ -1,42 +1,26 @@
 {
   "pages": [
     {
-      "path": "pages/home/home",
-      "style": {
-      }
+      "path": "pages/home/home"
     },
     {
-      "path": "pages/cart/cart",
-      "style": {
-      }
+      "path": "pages/cart/cart"
     },
     {
-      "path": "pages/category/category",
-      "style": {
-      }
+      "path": "pages/category/category"
     },
     {
-      "path": "pages/user/user",
-      "style": {
-      }
+      "path": "pages/user/user"
     }
   ],
   "subPackages": [
     {
       "root": "subpkg",
       "pages": [{
-        "path" : "goods_detail/goods_detail",
-        "style" : 
-        {
-          "navigationBarTitleText" : ""
-        }
+        "path" : "goods_detail/goods_detail"
       },
       {
-        "path" : "goods_list/goods_list",
-        "style" : 
-        {
-          "navigationBarTitleText" : ""
-        }
+        "path" : "goods_list/goods_list"
       }]
     }
   ],
