@@ -5,13 +5,19 @@
         <my-goods :goods="goods"></my-goods>
       </view>
     </view>
+    <view class="back-to-top" :class="{show: showBackToTop}" @click="backToTop"></view>
   </view>
 </template>
 
 <script>
+  import { debounce } from '../../common/utils/debounce';
   export default {
     data() {
       return {
+        // scrollDistance
+        scrollDistance: 0,
+        // 控制是否显示返回顶部按钮
+        showBackToTop: false,
         // 是否正在请求数据
         isLoading: false,
         // 默认图片，用于占位图片损坏的位置
@@ -39,8 +45,32 @@
       this.queryObj.cid = options.cid || ''
       // 获取商品列表数据
       this.getGoodsList()
+      this.scrollDebounced = debounce(this.handleScroll, 200)
+    },
+    // 滑动生命周期
+    onPageScroll (e) {
+      this.scrollDebounced(e.scrollTop)
     },
     methods: {
+      handleScroll (scrollTop) {
+        this.checkShowBackToTop(scrollTop)
+      },
+      // 检查是否显示返回顶部按钮
+      checkShowBackToTop(scrollTop) {
+          if (scrollTop > 100) {
+              this.showBackToTop = true;
+              // console.log('展示返回顶部按钮')
+          } else {
+              this.showBackToTop = false;
+          }
+      },
+      // 返回页面顶部
+      backToTop () {
+        uni.pageScrollTo ({
+          scrollTop: 0,
+          duration: 300 // 动画时长
+        })
+      },
       // 点击商品跳转到详情
       gotoDetail (goods) {
         console.log('跳转到商品详情，id=', goods.goods_id)
@@ -95,5 +125,37 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.back-to-top {
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+  width: 35px; /* 设置按钮宽度 */
+  height: 35px; /* 设置按钮高度，使其等于宽度 */
+  background: linear-gradient(45deg, #ff7e5f, #feb47b); /* 渐变背景 */
+  color: #fff;
+  border-radius: 50%; /* 圆形按钮 */
+  text-align: center;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s, transform 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-10px); /* 小幅度上移动画 */
+}
+
+.back-to-top::before {
+  content: "↑"; /* 使用向上的箭头符号 */
+  font-size: 21px;
+}
+
 </style>
