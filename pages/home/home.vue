@@ -38,7 +38,9 @@
 </template>
 
 <script>
+  import BadgeMixin from '@/mixins/tabbar-badge.js'
   export default {
+    mixins: [BadgeMixin],
     data() {
       return {
         // 存放轮播图

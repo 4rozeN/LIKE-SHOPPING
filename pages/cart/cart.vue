@@ -5,11 +5,19 @@
 </template>
 
 <script>
+  import BadgeMixin from '@/mixins/tabbar-badge.js'
+  import {mapGetters} from 'vuex'
   export default {
+    mixins: [BadgeMixin],
     data() {
       return {
         
       };
+    },
+    computed: {
+      ...mapGetters('Cart', ['getTotal'])
+    },
+    methods: {
     }
   }
 </script>

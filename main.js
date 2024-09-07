@@ -4,6 +4,8 @@ import Vue from 'vue'
 import App from './App'
 // 按需导入 $http 对象
 import { $http } from '@escook/request-miniprogram'
+// 导入store的示例
+import store from './store/store.js'
 // 设置请求根路径
 $http.baseUrl = 'https://api-hmugo-web.itheima.net'
 // 挂载到顶级对象uni
@@ -34,7 +36,9 @@ Vue.config.productionTip = false
 App.mpType = 'app'
 
 const app = new Vue({
-    ...App
+    ...App,
+    // 将store挂载到Vue实例上
+    store
 })
 app.$mount()
 // #endif

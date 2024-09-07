@@ -40,6 +40,9 @@
 </template>
 
 <script>
+  import {
+    mapMutations, mapGetters
+  } from 'vuex'
   export default {
     data() {
       return {
@@ -70,6 +73,9 @@
         ]
       };
     },
+    computed: {
+      ...mapGetters('Cart', ['getTotal'])
+    },
     filters: {
       tofixed(num) {
         return Number(num).toFixed(2)
@@ -82,8 +88,29 @@
       this.getGoodsDetail(goods_id)
     },
     methods: {
+      ...mapMutations('Cart', ['addToCart']),
+      // 添加到购物车
+      buttonClick(e) {
+        // 由于该点击事件处理右侧两个按钮，所以判断点击的是谁
+        if (e.content.text === '加入购物车') {
+          // 封装一个goodsObj
+          const goodsObj = {
+            goods_id: this.goods_info.goods_id, // 商品的Id
+            goods_name: this.goods_info.goods_name, // 商品的名称
+            goods_price: this.goods_info.goods_price, // 商品的价格
+            goods_count: 1, // 商品的数量
+            goods_small_logo: this.goods_info.goods_small_logo, // 商品的图片
+            goods_state: true // 商品的勾选状态
+          }
+          // 加入到vuex子模块Cart
+          this.addToCart(goodsObj)
+          console.log('点击了加入购物车')
+        } else {
+          console.log('点击了立即购买')
+        }
+      },
       // 添加到收藏
-      myFavi () {
+      myFavi() {
         this.isMyFavi = !this.isMyFavi
       },
       // 左侧按钮的点击事件
@@ -119,6 +146,17 @@
         this.goods_info.goods_introduce = this.goods_info.goods_introduce.replace(/<img /g,
           '<img style="display:block;" ')
         console.log('this.goods_info', this.goods_info)
+      }
+    },
+    watch: {
+      getTotal: {
+        handler(newVal) {
+          const findRes = this.options.find((el) => el.text === '购物车')
+          if (findRes) {
+            findRes.info = newVal           
+          }
+        },
+        immediate: true
       }
     }
   }

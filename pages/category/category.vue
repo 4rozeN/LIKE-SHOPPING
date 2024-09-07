@@ -27,7 +27,9 @@
 </template>
 
 <script>
+  import BadgeMixin from '@/mixins/tabbar-badge.js'
   export default {
+    mixins: [BadgeMixin],
     data() {
       return {
         // 搜索栏背景色
