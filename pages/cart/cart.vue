@@ -1,8 +1,10 @@
 <template>
-  <view>
+  <view class="cart-container" v-if="cart.length !== 0">
+    <!-- 地址信息 -->
     <view class="address-info-box">
       <my-address></my-address>
     </view>
+
     <view class="cart-title">
       <!-- 左侧图标 -->
       <uni-icons type="shop" size="18"></uni-icons>
@@ -18,6 +20,13 @@
         </uni-swipe-action-item>
       </block>
     </uni-swipe-action>
+    <!-- 结算区域 -->
+    <my-settle></my-settle>
+  </view>
+  <!-- 渲染购物车空的页面 -->
+  <view class="empty-cart" v-else>
+    <image src="../../static/cart_empty@2x.png" class="empty-img"></image>
+    <text class="tip-text">空空如也</text>
   </view>
 </template>
 
@@ -88,5 +97,22 @@
     display: flex;
     padding: 10px 5px;
     border-bottom: 1px solid #f0f0f0;
+  }
+
+  .empty-cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 150px;
+    
+    .empty-img {
+      width: 90px;
+      height: 90px;
+    }
+    .tip-text {
+      font-size: 12px;
+      color: gray;
+      margin-top: 15px;
+    }
   }
 </style>

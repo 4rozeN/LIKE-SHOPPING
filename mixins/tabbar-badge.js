@@ -4,7 +4,7 @@ import {
 // 导出一个 mixin 对象
 export default {
   computed: {
-    ...mapGetters('Cart', ['getTotal']),
+    ...mapGetters('Cart', ['getTotal', 'getSelected']),
   },
   onShow() {
     // 在页面刚展示的时候，设置数字徽标

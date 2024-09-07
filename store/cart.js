@@ -45,6 +45,10 @@ export default {
         console.log('未找到有效count值')
       }
     },
+    updateAllGoodsState(state, newState) {
+      state.cart.forEach(x => x.goods_state = newState)
+      this.commit('Cart/saveToStorage')
+    },
     removeGoodsById(state, goods_id) {
       state.cart = state.cart.filter(x => x.goods_id !== goods_id)
       this.commit('Cart/saveToStorage')
@@ -57,6 +61,16 @@ export default {
       state.cart.forEach(goods => count += goods.goods_count)
       console.log('count:', count)
       return count
+    },
+    // 提供方法获得cart中选中的商品总数
+    getSelected(state) {
+      return state.cart.filter(x => x.goods_state).reduce((total, item) => total += item.goods_count, 0)
+    },
+    // 提供方法计算选中商品总价
+    selectedGoodsAmount(state) {
+      return state.cart.filter(x => x.goods_state)
+      .reduce((total, item) => total += item.goods_count * item.goods_price, 0)
+      .toFixed(2)
     }
   }
 }
