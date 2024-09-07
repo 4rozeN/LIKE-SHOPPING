@@ -51,6 +51,7 @@
     "mp-weixin" : {
         /* 小程序特有相关 */
         "appid" : "wxf82ecdecc5bd5875",
+        "requiredPrivateInfos": ["chooseAddress"],
         "setting" : {
             "urlCheck" : false
         },

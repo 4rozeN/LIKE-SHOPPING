@@ -1,5 +1,8 @@
 <template>
   <view>
+    <view class="address-info-box">
+      <my-address></my-address>
+    </view>
     <view class="cart-title">
       <!-- 左侧图标 -->
       <uni-icons type="shop" size="18"></uni-icons>
@@ -55,8 +58,9 @@
       },
       // 点击了滑动操作按钮
       swipeActionClickHandler(goods) {
-        // console.log(goods)
+        console.log(goods)
         this.removeGoodsById(goods.goods_id)
+        this.setBadge()
       }
     }
   }
