@@ -77,15 +77,15 @@
         // 如果弹框异常，直接退出
         if (err2) return
         // 如果点击取消，则提示用户
-        if (confirmResult.cancel) return uni.$showMsg('您取消了地址授权！')
+        if (confirmResult.cancel) return uni.$showMsg('您取消了地址授权！', 1500)
         // 如果点击确认，则调用uni.openSetting()进入授权页面，让用户重新获取
         if (confirmResult.confirm) return uni.openSetting({
           // 授权结束，对授权结果做进一步判断
           success: (settingResult) => {
             // 为true，提示成功
-            if (settingResult.authSetting['scope.address']) return uni.$showMsg('授权成功！请选择地址')
+            if (settingResult.authSetting['scope.address']) return uni.$showMsg('授权成功！请选择地址', 1500)
             // 为false，提示用户
-            if (!settingResult.authSetting['scope.address']) return uni.$showMsg('您取消了地址授权！')
+            if (!settingResult.authSetting['scope.address']) return uni.$showMsg('您取消了地址授权！', 1500)
           }
         })
       }

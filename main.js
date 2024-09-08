@@ -16,6 +16,14 @@ $http.beforeRequest = function (options) {
   uni.showLoading({
     title: '数据加载中...',
   })
+  // 判断是否请求的是需要权限的API接口
+  if (options.url.indexOf('/user/') !== -1) {
+    // 为请求头添加身份认证字段
+    options.header = {
+      // 字段的值从vuex获取
+      Authorization: store.state.User.token
+    }
+  }
 }
 
 // 请求完成之后做一些事情

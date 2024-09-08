@@ -60,7 +60,7 @@
         this.historySave(e)
         // console.log('确认搜索：', e.value)
         uni.navigateTo({
-          url: '/subpkg/search_results/search_results?query=' + e.value
+          url: '/subpkg/goods_list/goods_list?query=' + e.value
         })
       },
       // 保存搜索历史到数组

@@ -52,9 +52,19 @@ export default {
     removeGoodsById(state, goods_id) {
       state.cart = state.cart.filter(x => x.goods_id !== goods_id)
       this.commit('Cart/saveToStorage')
+    },
+    removeGoodsByIds(state, goods_ids) {
+      state.cart = state.cart.filter(goods => !goods_ids.includes(goods.goods_id))
+      this.commit('Cart/saveToStorage')
     }
   },
   getters: {
+    // 提供方法得到购物车中选中商品的id列表
+    getSelectedIds(state) {
+      return state.cart
+        .filter(goods => goods.goods_state)
+        .map(goods => goods.goods_id)
+    },
     // 提供方法得到cart中商品的总数
     getTotal (state) {
       let count = 0

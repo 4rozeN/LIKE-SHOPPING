@@ -139,7 +139,7 @@
         })
         console.log('res:', res)
         if (res.data.meta.status !== 200) {
-          return uni.$showMsg()
+          return uni.$showMsg(res.data.meta.msg, 1500)
         }
         this.goods_info = res.data.message
         // 对数据中的goods_introduce做正则替换，使其没有间隙

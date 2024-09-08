@@ -82,7 +82,7 @@
       onReachBottom () {
         // 判断是否还有下一页
         if (this.queryObj.pagenum * this.queryObj.pagesize >= this.total) {
-          return uni.$showMsg('数据全部加载完毕！')
+          return uni.$showMsg('数据全部加载完毕！', 1500)
         }
         // 判断是否正在请求，为真则不发起额外的请求，防止多次上拉触底
         if (this.isLoading) return
